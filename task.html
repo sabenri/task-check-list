@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task List</title>
+    <link rel="stylesheet" href="task.css">
+</head>
+<body>
+    <main class="app"> 
+        <header class="app-header">
+            <div>
+                <p class="eyebrow">TASK MANAGER</p>
+                <h1>my list</h1>
+
+                <p class="date">today</p>
+
+            </div>
+
+        </header>
+
+        <section class="task-input-section">
+            <h2>What needs to get done?</h2>
+
+            <div class="task-input"> 
+                <input type="text"
+                id="task-input"
+                placeholder="Add new task..."
+                >
+
+                <button id="add-task">
+                    +
+                </button>
+            </div>
+
+        </section>
+
+        <section class="task-section">
+            <h2>TO DO</h2>
+
+            <ul id="task-list"> 
+
+            </ul>
+
+        </section>
+
+        <section class="task-section">
+
+            <h2>DONE</h2>
+
+            <ul id="completed-task">
+
+            </ul>
+
+        </section>
+
+
+    </main>
+    <script src="task.js"> </script>
+</body>
+</html>
