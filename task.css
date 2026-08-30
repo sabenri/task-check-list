@@ -1,0 +1,10 @@
+:root{
+    --background: #f6f7fb;
+    --surface: #ffffff;
+    --text: #25252d;
+    --muted-text: #8a8a96;
+    --accent: #8eb9ff;
+    --accent-hover:#6fa4f7;
+    --border:#e4e4ea;
+    --max-width: 700px;
+}
