@@ -37,4 +37,47 @@ button {
     cursor: pointer;
 }
 
+.app {
+    width: min(100% - 2rem, 700px);
+    padding: 4rem 0;
+}
+
+.app-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.eyebrow {
+    margin: 0 0 0.5rem;
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 0.15em;
+}
+
+.app-header h1 {
+    margin: 0;
+    font-size: 3rem;
+}
+
+.view {
+    width: 100%;
+}
+
+.list-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.list-card {
+    width: 100%;
+    padding: 1.5rem;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
 
