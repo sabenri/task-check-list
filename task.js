@@ -70,7 +70,7 @@ newListForm.addEventListener("submit", (event) => {
         tasks: []
     };
 
-    listContainer.push(newList);
+    lists.push(newList);
 
     const listCard = document.createElement("button");
 
@@ -122,7 +122,7 @@ addTaskButton.addEventListener("click", () => {
         completed: false
     };
 
-    activeList.task.push(newTask);
+    activeList.tasks.push(newTask);
     taskInput.value = "";
     displayTasks();
 
