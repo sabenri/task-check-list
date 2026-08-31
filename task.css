@@ -37,6 +37,7 @@ button {
     cursor: pointer;
 }
 
+
 .app {
     width: min(100% - 2rem, 700px);
     padding: 4rem 0;
@@ -79,5 +80,31 @@ button {
     border-radius: 12px;
     text-align: center;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#empty-list {
+    color: var(--muted-text);
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.add-new-list {
+    display: block;
+    margin: 2rem auto 0;
+    padding: 0.9rem 1.5rem;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.add-new-list:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px rgba(142, 185, 255, 0.35);
+}
+
+.view-hidden {
+    display: none;
 }
 
