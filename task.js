@@ -45,10 +45,40 @@ function displayTasks() {
     taskList.innerHTML = "";
     completedTask.innerHTML = "";
 
-    activeList.tasks.forEach((task) => {
+    activeList.tasks.forEach((task, index) => {
+        
         const taskItem = document.createElement("li");
-        taskItem.textContent = task.name;
-        taskList.appendChild(taskItem);
+
+        const taskCheckbox = document.createElement("input");
+        taskCheckbox.type = "checkbox";
+        taskCheckbox.checked = task.completed;
+
+        const taskName = document.createElement("span");
+        taskName.textContent = task.name;
+
+        const deleteButton = document. createElement('button');
+        deleteButton.textContent = "X";
+
+        taskItem.appendChild(taskCheckbox);
+        taskItem.appendChild(taskName);
+        taskItem.appendChild(deleteButton);
+
+        taskCheckbox.addEventListener("change", () => {
+            task.completed = taskCheckbox.checked;
+            displayTasks();
+        });
+
+        deleteButton.addEventListener("click", () => {
+            activeList.tasks.splice(index, 1);
+            displayTasks();
+        });
+
+        if (task.completed) {
+            completedTask.appendChild(taskItem);
+        } else {
+            taskList.appendChild(taskItem);
+        }
+
     });
 }
 
