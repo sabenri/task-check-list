@@ -9,7 +9,7 @@ const listNameInput = document.querySelector("#list-name");
 const listDeadlineInput = document.querySelector("#list-deadline");
 const newListTaskInput = document.querySelector("#new-list-task");
 const addNewListTaskButton = document.querySelector("#add-new-list-task");
-const newListTaskContainer = document.querySelector("new-list-task-container");
+const newListTaskContainer = document.querySelector("#new-list-task-container");
 const currentList = document.querySelector("#current-list");
 
 const taskInput = document.querySelector("#task-input");
@@ -101,7 +101,7 @@ newListForm.addEventListener("submit", (event) => {
     const newList = {
         name: listName,
         deadline: listDeadline,
-        tasks: []
+        tasks: [...newListTasks]
     };
 
     lists.push(newList);
@@ -144,7 +144,7 @@ addNewListTaskButton.addEventListener("click", () => {
 
     newListTasks.push(newTask);
 
-    const taskItem = Document.createElement("li");
+    const taskItem = document.createElement("li");
     taskItem.textContent = taskName;
     newListTaskContainer.appendChild(taskItem);
     newListTaskInput.value = "";
