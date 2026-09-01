@@ -7,6 +7,9 @@ const listContainer = document.querySelector("#list-container");
 const emptyListMessage = document.querySelector("#empty-list");
 const listNameInput = document.querySelector("#list-name");
 const listDeadlineInput = document.querySelector("#list-deadline");
+const newListTaskInput = document.querySelector("#new-list-task");
+const addNewListTaskButton = document.querySelector("#add-new-list-task");
+const newListTaskContainer = document.querySelector("new-list-task-container");
 const currentList = document.querySelector("#current-list");
 
 const taskInput = document.querySelector("#task-input");
@@ -20,6 +23,7 @@ const backToListsButton = document.querySelector("#back-to-lists");
 
 let lists = [];
 let activeList = null;
+let newListTasks = [];
 
 
 function showListView() {
@@ -124,6 +128,27 @@ newListForm.addEventListener("submit", (event) => {
 
     showListView();
 
+});
+
+addNewListTaskButton.addEventListener("click", () => {
+    const taskName = newListTaskInput.value.trim();
+
+    if (taskName === "") {
+        return;     
+    }
+
+    const newTask = {
+        name: taskName,
+        completed: false
+    };
+
+    newListTasks.push(newTask);
+
+    const taskItem = Document.createElement("li");
+    taskItem.textContent = taskName;
+    newListTaskContainer.appendChild(taskItem);
+    newListTaskInput.value = "";
+    newListTaskInput.focus();
 });
 
 
