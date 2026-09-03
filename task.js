@@ -44,6 +44,7 @@ function showTaskView () {
     newListView.classList.add("view-hidden");
     taskView.classList.remove("view-hidden");
 }
+ 
 
 function displayTasks() {
     taskList.innerHTML = "";
@@ -69,11 +70,13 @@ function displayTasks() {
 
         taskCheckbox.addEventListener("change", () => {
             task.completed = taskCheckbox.checked;
+            saveLists();
             displayTasks();
         });
 
         deleteButton.addEventListener("click", () => {
             activeList.tasks.splice(index, 1);
+            saveLists();
             displayTasks();
         });
 
@@ -84,6 +87,48 @@ function displayTasks() {
         }
 
     });
+}
+
+function saveLists(){
+    localStorage.setItem("taskLists", JSON.stringify(lists));
+}
+
+function loadLists() {
+    const savedLists = localStorage.getItem("taskLists");
+
+    if (savedLists) {
+        lists = JSON.parse(savedLists);
+    }
+    
+}
+
+loadLists();
+displayLists();
+
+function displayLists() {
+    listContainer.innerHTML = "";
+    if(lists.length === 0) {
+        emptyListMessage.style.display = "block";
+        return;
+    }
+
+    emptyListMessage.style.display = "none";
+
+    lists.forEach((list) => {
+        const listCard = document.createElement("button");
+        listCard.classList.add("list-card");
+        listCard.textContent = list.name;
+
+        listCard.addEventListener ("click", () => {
+            activeList = list;
+            currentList.textContent = list.name;
+            displayTasks();
+            showTaskView();
+        });
+
+        listContainer.appendChild(listCard);
+    });
+    
 }
 
 
@@ -105,29 +150,16 @@ newListForm.addEventListener("submit", (event) => {
     };
 
     lists.push(newList);
+    saveLists();
+    newListTasks = [];
 
-    const listCard = document.createElement("button");
+    listNameInput.value = "",
+    listDeadlineInput.value = "",
 
-    listCard.classList.add("list-card");
-
-    listCard.textContent = listName;
-
-    listContainer.appendChild(listCard);
-
-    listCard.addEventListener("click", () => {
-        activeList = newList;
-        currentList.textContent = listName;
-        displayTasks();
-        showTaskView();
-    });
-
-    emptyListMessage.style.display = "none";
-
-    listNameInput.value = "";
-    listDeadlineInput.value = "";
-
+    displayLists();
     showListView();
 
+    
 });
 
 addNewListTaskButton.addEventListener("click", () => {
@@ -178,6 +210,7 @@ addTaskButton.addEventListener("click", () => {
     };
 
     activeList.tasks.push(newTask);
+    saveLists();
     taskInput.value = "";
     displayTasks();
 
