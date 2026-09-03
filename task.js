@@ -117,14 +117,41 @@ function displayLists() {
     lists.forEach((list) => {
         const listCard = document.createElement("button");
         listCard.classList.add("list-card");
-        listCard.textContent = list.name;
 
-        listCard.addEventListener ("click", () => {
+        const listTitle = document.createElement("h2");
+        listTitle.textContent = list.name;
+        
+        const listDeadline = document.createElement("p");
+
+        if (list.deadline) {
+            const deadlineDate = new Date(list.deadline + "t00:00:00");
+            listDeadline.textContent = 
+            `Due: ${deadlineDate.toLocaleDateString()}`;
+        } else {
+            listDeadline.textContent = "No Deadline";
+        }
+
+        const taskCount = document.createElement("p");
+
+        const totalTasks = list.tasks.length;
+        const completedTask = list.tasks.filter(
+            (task) => task.completed
+        ).length;
+
+        taskCount.textContent = 
+        `${completedTask}/${totalTasks} tasks Completed`;
+
+        listCard.appendChild(listTitle);
+        listCard.appendChild(listDeadline);
+        listCard.appendChild(taskCount);
+
+        listCard.addEventListener("click", () => {
             activeList = list;
             currentList.textContent = list.name;
             displayTasks();
             showTaskView();
         });
+
 
         listContainer.appendChild(listCard);
     });
