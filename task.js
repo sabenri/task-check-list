@@ -134,12 +134,12 @@ function displayLists() {
         const taskCount = document.createElement("p");
 
         const totalTasks = list.tasks.length;
-        const completedTask = list.tasks.filter(
+        const completedCount = list.tasks.filter(
             (task) => task.completed
         ).length;
 
         taskCount.textContent = 
-        `${completedTask}/${totalTasks} tasks Completed`;
+        `${completedCount}/${totalTasks} tasks Completed`;
 
         listCard.appendChild(listTitle);
         listCard.appendChild(listDeadline);
@@ -224,6 +224,7 @@ cancelNewListButton.addEventListener("click", () => {
 
 backToListsButton.addEventListener("click", () => {
     showListView();
+    showListView();
 });
 
 addTaskButton.addEventListener("click", () => {
@@ -242,3 +243,6 @@ addTaskButton.addEventListener("click", () => {
     displayTasks();
 
 });
+
+loadLists();
+displayLists();

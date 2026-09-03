@@ -73,15 +73,41 @@ button {
 
 .list-card {
     width: 100%;
+    min-height: 150px;
     padding: 1.5rem;
     background: var(--surface);
     color: var(--text);
     border: 1px solid var(--border);
     border-radius: 12px;
     text-align: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
+.list-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: 0 8px 20px rgba(142, 185, 255, 0.15);
+}
+
+.list-card h2 {
+    margin: 0 0 0.75rem;
+    font-size: 1.4rem;
+}
+
+.list-card p {
+    margin:  0.25rem 0;
+    color: var(--muted-text);
+    font-size: 0.85rem;
+}
+
+.list-card p:last-child{
+    color: var(--accent);
+    font-weight: bold;
+}
 #empty-list {
     color: var(--muted-text);
     text-align: center;
