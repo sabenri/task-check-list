@@ -125,6 +125,23 @@ button {
     color: var(--accent);
     font-weight: bold;
 }
+
+.delete-list-button{
+    margin-top: 0.75rem;
+    padding: 0.5rem 0.8rem;
+    background: transparent;
+    color: red;
+    border: 1px solid #e8a1ae;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    transition:  color 0.2s ease ;
+}
+
+.delete-list-button:hover {
+    background: red;
+    color: white;
+}
+
 #empty-list {
     color: var(--muted-text);
     text-align: center;

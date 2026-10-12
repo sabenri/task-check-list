@@ -112,8 +112,9 @@ function displayLists() {
     emptyListMessage.style.display = "none";
 
     lists.forEach((list) => {
-        const listCard = document.createElement("button");
+        const listCard = document.createElement("div");
         listCard.classList.add("list-card");
+        listCard.style.cursor = "pointer";
 
         if (list.color){
             listCard.style.setProperty("--accent", list.color);
@@ -152,6 +153,34 @@ function displayLists() {
             displayTasks();
             showTaskView();
         });
+
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent="Delete List";
+        deleteButton.classList.add("delete-list-button");
+        deleteButton.type = "button";
+
+        deleteButton.addEventListener("click",(event) => {
+            event.stopPropagation();
+
+            const confirmed = confirm(
+                `Are you sure you want to deleta "${list.name}"?`
+            );
+
+            if(!confirmed) {
+                return;
+            }
+
+            lists = lists.filter((item) => item !== list);
+
+            if (activeList === list) {
+                activeList = null
+            }
+
+            saveLists();
+            displayLists();
+        });
+
+        listCard.appendChild(deleteButton);
 
 
         listContainer.appendChild(listCard);
