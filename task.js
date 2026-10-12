@@ -102,9 +102,6 @@ function loadLists() {
     
 }
 
-loadLists();
-displayLists();
-
 function displayLists() {
     listContainer.innerHTML = "";
     if(lists.length === 0) {
@@ -118,13 +115,17 @@ function displayLists() {
         const listCard = document.createElement("button");
         listCard.classList.add("list-card");
 
+        if (list.color){
+            listCard.style.setProperty("--accent", list.color);
+        };
+
         const listTitle = document.createElement("h2");
         listTitle.textContent = list.name;
         
         const listDeadline = document.createElement("p");
 
         if (list.deadline) {
-            const deadlineDate = new Date(list.deadline + "t00:00:00");
+            const deadlineDate = new Date(list.deadline + "T00:00:00");
             listDeadline.textContent = 
             `Due: ${deadlineDate.toLocaleDateString()}`;
         } else {
@@ -165,6 +166,10 @@ newListForm.addEventListener("submit", (event) => {
 
     const listName = listNameInput.value.trim();
     const listDeadline = listDeadlineInput.value;
+    const selectedColor = document.querySelector(
+        `input[name="list-color"]:checked`
+    );
+    const listColor = selectedColor ? selectedColor.value : null;
 
     if (listName === "") {
         return;
@@ -173,6 +178,7 @@ newListForm.addEventListener("submit", (event) => {
     const newList = {
         name: listName,
         deadline: listDeadline,
+        color: listColor,
         tasks: [...newListTasks]
     };
 
@@ -180,8 +186,8 @@ newListForm.addEventListener("submit", (event) => {
     saveLists();
     newListTasks = [];
 
-    listNameInput.value = "",
-    listDeadlineInput.value = "",
+    listNameInput.value = "";
+    listDeadlineInput.value = "";
 
     displayLists();
     showListView();
@@ -223,7 +229,7 @@ cancelNewListButton.addEventListener("click", () => {
 
 
 backToListsButton.addEventListener("click", () => {
-    showListView();
+    displayLists();
     showListView();
 });
 
