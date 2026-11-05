@@ -254,6 +254,23 @@ button {
 #new-list-task-container li {
     margin-bottom: 0.5rem;
 }
+
+.edit-list-button {
+    margin-top: 0.75rem;
+    padding: 0.4rem 0.8rem;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.5rem;
+    transition: transform 0.2s ease;
+}
+
+.edit-list-button:hover {
+    background: var(--accent-hover);
+    transform: translateY(-);
+}
+
 .view-hidden {
     display: none;
 }

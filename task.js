@@ -21,9 +21,17 @@ const openNewListButton = document.querySelector("#open-new-list");
 const cancelNewListButton = document.querySelector("#cancel-new-list");
 const backToListsButton = document.querySelector("#back-to-lists");
 
+
+const editListView = document.querySelector("#edit-list-view");
+const editListForm = document.querySelector("#edit-list-form");
+const editListNameInput = document.querySelector("#edit-list-name");
+const editListDeadlineInput = document.querySelector("#edit-list-deadline");
+const cancelEditListButton = document.querySelector("#cancel-edit-list");
+
 let lists = [];
 let activeList = null;
 let newListTasks = [];
+let listBeingEdited = null;
 
 
 function showListView() {
@@ -43,6 +51,38 @@ function showTaskView () {
     listView.classList.add ("view-hidden");
     newListView.classList.add("view-hidden");
     taskView.classList.remove("view-hidden");
+}
+
+function openEditListForm(list){
+    listBeingEdited = list;
+
+    editListNameInput.value = list.name;
+    editListDeadlineInput.value= list.deadline || "";
+    
+    const colorInput = document.querySelector(
+        `input[name="edit-list-color"][value="${list.color}"]`
+    );
+
+    if (colorInput) {
+        colorInput.checked = true;
+    }else {
+        document.querySelectorAll(
+            'input[name="edit-list-color"]'
+        ).forEach((input) => {
+            input.checked = false;
+        });
+    }
+
+    listView.classList.add("view-hidden");
+    taskView.classList.add("view-hidden");
+    newListView.classList.add("view-hidden");
+    editListView.classList.remove("view-hidden");
+
+}
+
+function showEditListView(){
+    editListView.classList.add("view-hidden");
+    showListView();
 }
  
 
@@ -154,6 +194,20 @@ function displayLists() {
             showTaskView();
         });
 
+        const editButton = document.createElement("button");
+        
+        editButton.textContent = "Edit List";
+        editButton.classList.add("edit-list-button");
+        editButton.type= "button";
+
+        editButton.addEventListener("click", (event) => {
+            event.stopPropagation();
+
+            openEditListForm(list);
+        });
+
+        listCard.appendChild(editButton);
+
         const deleteButton = document.createElement("button");
         deleteButton.textContent="Delete List";
         deleteButton.classList.add("delete-list-button");
@@ -214,12 +268,14 @@ newListForm.addEventListener("submit", (event) => {
     lists.push(newList);
     saveLists();
     newListTasks = [];
+    newListTaskContainer.innerHTML = "";
 
     listNameInput.value = "";
     listDeadlineInput.value = "";
 
     displayLists();
-    showListView();
+    listBeingEdited = null;
+    showEditListView();
 
     
 });
@@ -277,6 +333,45 @@ addTaskButton.addEventListener("click", () => {
     taskInput.value = "";
     displayTasks();
 
+});
+
+editListForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    if(!listBeingEdited) {
+        return;
+    }
+
+    const newName = editListNameInput.value.trim();
+
+    if (newName ==="") {
+        return;
+    }
+
+    const selectedColor = document.querySelector(
+        'input[name="edit-list-color"]:checked'
+    );
+
+    listBeingEdited.name = newName;
+    listBeingEdited.deadline = editListDeadlineInput.value;
+    listBeingEdited.color = selectedColor 
+    ? selectedColor.value
+    : listBeingEdited.color;
+
+    saveLists();
+    displayLists();
+
+    if (activeList === listBeingEdited) {
+        currentList.textContent = listBeingEdited.name;
+    }
+
+    listBeingEdited = null;
+    showListView();
+});
+
+cancelEditListButton.addEventListener ("click", () => {
+    listBeingEdited = null;
+    showEditListView();
 });
 
 loadLists();
