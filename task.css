@@ -158,9 +158,9 @@ button {
     font-weight: bold;
 }
 
-#new-list-from input[type="text"],
-#new-listlform input[type="date"]{
-    width: 100;
+#new-list-form input[type="text"],
+#new-list-form input[type="date"]{
+    width: 100%;
     padding: 0.5rem;
     border: 1px solid var(--border);
     border-radius: 5px;
@@ -248,7 +248,7 @@ button {
 }
 
 #new-list-task-container{
-    padding-left: 1,25rem;
+    padding-left: 1.25rem;
 }
 
 #new-list-task-container li {
@@ -268,7 +268,7 @@ button {
 
 .edit-list-button:hover {
     background: var(--accent-hover);
-    transform: translateY(-);
+    transform: translateY(-2px);
 }
 
 .view-hidden {
