@@ -132,7 +132,7 @@ button {
     background: transparent;
     color: red;
     border: 1px solid #e8a1ae;
-    border-radius: 5px;
+    border-radius: 3%;
     font-size: 0.8rem;
     transition:  color 0.2s ease ;
 }
@@ -262,7 +262,7 @@ button {
     color: white;
     border: none;
     border-radius: 5px;
-    font-size: 0.5rem;
+    font-size: 0.75rem;
     transition: transform 0.2s ease;
 }
 
@@ -271,7 +271,110 @@ button {
     transform: translateY(-2px);
 }
 
+#task-list li,
+#completed-task li {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    width: 100%;
+    padding: 0.80rem 1rem;
+    margin-bottom: 0.65rem;
+
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+#task-list li span,
+#completed-task li span {
+    flex: 1;
+    min-width: 0;
+    font-weight: bolder;
+    overflow-wrap: anywhere;
+}
+
+#completed-task li span {
+    color: var(--muted-text);
+    text-decoration: line-through;
+}
+
+#task-list input[type='checkbox'],
+#completed-task input[type='checkbox']{
+    width: 15px;
+    height: 15px;
+    accent-color: var(--accent);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+#task-list li button, 
+#completed-task li button {
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    background: #fff0f2;
+    color: #e87991;
+    border: 1px solid #ffd5dd;
+    border-radius: 50%;
+
+    font-size: 0.80rem;
+    font-weight: bold;
+
+    transition: color 0.2s ease,
+                transform 02s ease;
+}
+
+#task-list li button:hover,
+#completed-task li button:hover {
+    background: #e87991;
+    color: white;
+    transform: scale(1.1);
+}
+
+.task-input {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.task-input input {
+    flex: 1;
+    min-width: 0;
+    padding: 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+}
+
+.task-input button {
+    width: 45px;
+    border: none;
+    border-radius: 5px;
+    background: var(--accent);
+    color: white;
+    font-size: 1.5rem;
+}
 .view-hidden {
     display: none;
+}
+
+@media (max-width: 500px) {
+    .list-grid {
+        grid-template-columns: 1fr;
+    }
+    .app {
+        padding: 2.5rem 0;
+    }
+
+    .app-header h1 {
+        font-size: 2.5rem;
+    }
+    
 }
 
