@@ -38,6 +38,7 @@ function showListView() {
     listView.classList.remove("view-hidden");
     taskView.classList.add("view-hidden");
     newListView.classList.add("view-hidden");
+    editListView.classList.add("view-hidden");
 }
 
 
